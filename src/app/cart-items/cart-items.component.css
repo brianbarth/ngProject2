@@ -1,0 +1,17 @@
+li {
+  padding: 10px;
+  list-style-type: none;
+}
+#arrayBox {
+  margin-top: 1.5rem;
+}
+ul {
+  padding-bottom: 2rem;
+}
+button {
+  width: 4.5rem;
+}
+input {
+  text-align: center;
+}
+

@@ -3,16 +3,19 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { CartItemsComponent } from './cart-items/cart-items.component';
+import { CartDataService } from './cart-data.service';
+import { Scramble } from './shared/scramble.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CartItemsComponent
+    CartItemsComponent,
+    Scramble
   ],
   imports: [
     BrowserModule
   ],
-  providers: [],
+  providers: [CartDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

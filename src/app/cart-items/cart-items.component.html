@@ -1,3 +1,45 @@
-<p>
-  cart-items works!
-</p>
+<!-- navigation ( event buttons )-->
+
+<div class=" nav justify-content-center border-bottom border-success">
+  <ul class="nav">
+    <li>
+      <input id="box" type="text" (input)="onUserInput($event)" (focus)="clearBox()" value=''>
+    </li>
+    <li class="nav-item">
+      <button type="button" class="btn btn-primary" (click)="onAddItem()">Add</button>
+    </li>
+    <li class="nav-item">
+      <button type="button" class="btn btn-primary" (click)="onPopItem()">Pop</button>
+    </li>
+    <li class="nav-item">
+      <button type="button" class="btn btn-secondary" (click)="onUpperItem()">Upper</button>
+    </li>
+    <li class="nav-item">
+      <button type="button" class="btn btn-secondary" (click)="onLowerItem()">Lower</button>
+    </li>
+    <li class="nav-item" *ngIf="!scramble">
+      <button type="button" class="btn btn-secondary" (click)="onScrambleItem()">Mix</button>
+    </li>
+    <li class="nav-item" *ngIf="scramble">
+      <button type="button" class="btn btn-secondary" (click)="onUnscrambleItem()">UnMix</button>
+    </li>
+  </ul>
+</div>
+
+<!-- main array container -->
+
+<div class="container" id="arrayBox">
+  <div class="row text-center" *ngIf="!upper && !scramble">
+    <li class="col-6 col-sm-4 col-md-3 col-lg-2" *ngFor="let item of dataArray">{{ item | lowercase }}</li>
+  </div>
+  <div class="row text-center" *ngIf="upper && !scramble">
+    <li class="col-6 col-sm-4 col-md-3 col-lg-2" *ngFor="let item of dataArray">{{ item | uppercase }}</li>
+  </div>
+  <div class="row text-center" *ngIf="!upper && scramble">
+    <li class="col-6 col-sm-4 col-md-3 col-lg-2" *ngFor="let item of dataArray">{{ item | scramble }}</li>
+  </div>
+  <div class="row text-center" *ngIf="upper && scramble">
+    <li class="col-6 col-sm-4 col-md-3 col-lg-2" *ngFor="let item of dataArray">{{ item | uppercase | scramble }}</li>
+  </div>
+</div>
+
