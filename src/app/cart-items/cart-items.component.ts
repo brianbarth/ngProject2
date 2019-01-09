@@ -12,6 +12,7 @@ export class CartItemsComponent implements OnInit {
   upper = false;
   scramble = false;
   word: string;
+  toggle = false;
 
   constructor(cartData: CartDataService) {
     this.dataArray = cartData.sendData();
@@ -49,6 +50,14 @@ onUnscrambleItem() {
 clearBox() {
   ((document.getElementById('box') as HTMLInputElement).value) = '';
   console.log('This should clear the box');
+}
+onLargeItem() {
+  this.toggle = true;
+  console.log('Large Font');
+}
+onSmallItem() {
+  this.toggle = false;
+  console.log('Small Font');
 }
 
 }
