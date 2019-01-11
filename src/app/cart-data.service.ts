@@ -12,7 +12,7 @@ export class CartDataService {
 
   constructor(private http: HttpClient) {
     this.getJSON().subscribe(data => {
-      console.log('data loaded from file');
+      console.log('data loaded from file: "data.json"');
     });
    }
 

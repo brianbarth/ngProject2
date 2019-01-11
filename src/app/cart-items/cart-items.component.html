@@ -39,7 +39,7 @@
 
 <div class="container text-white" id="arrayBox">
   <div class="row text-center" *ngIf="!upper && !scramble">
-    <li class="col-6 col-sm-4 col-md-3" [ngStyle]="{'font-size.px': toggle ? 20 : 14 }" *ngFor="let item of dataArray">{{ item | lowercase }}</li>
+    <li class="col-6 col-sm-4 col-md-3" [ngStyle]="{'font-size.px': toggle ? 20 : 14 }" *ngFor="let item of dataArray">{{ item  }}</li>
   </div>
   <div class="row text-center" *ngIf="upper && !scramble">
     <li class="col-6 col-sm-4 col-md-3" [ngStyle]="{'font-size.px': toggle ? 20 : 14 }" *ngFor="let item of dataArray">{{ item | uppercase }}</li>

@@ -13,6 +13,8 @@ export class CartItemsComponent implements OnInit {
   word: string;
   toggle = false;
   errorMessage: string;
+  capitalizeWord: string;
+  allCapsWord: string;
 
   constructor(private cartDataService: CartDataService) {
     this.dataArray = cartDataService.sendData();
@@ -21,7 +23,7 @@ export class CartItemsComponent implements OnInit {
   ngOnInit() {
     this.cartDataService.getJSON().subscribe(data => {
       this.dataArray = data.cartData;
-      console.log('data received from CartDataService');
+      console.log('data received from: CartDataService');
     });
   }
 
@@ -29,8 +31,17 @@ export class CartItemsComponent implements OnInit {
     this.word = event.target.value;
   }
   onAddItem() {
+    this.word = this.word.toLowerCase();
+    this.word = this.word.charAt(0).toUpperCase() + this.word.slice(1);
+    console.log(this.word);
+
+    if (this.dataArray.includes(this.word)) {
+      ((document.getElementById('box') as HTMLInputElement).value) = 'FOOD ALREADY EXISTS IN LIST!';
+      console.log('error: food already included in array');
+    } else {
     this.dataArray = [...this.dataArray, this.word];
     console.log('Item Added: ' + this.word);
+    }
   }
   onPopItem() {
     this.dataArray = this.dataArray.slice(0, -1);
