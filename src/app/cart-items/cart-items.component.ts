@@ -7,57 +7,62 @@ import { CartDataService } from '../cart-data.service';
   styleUrls: ['./cart-items.component.css']
 })
 export class CartItemsComponent implements OnInit {
-  cartData: CartDataService;
   dataArray: string[];
   upper = false;
   scramble = false;
   word: string;
   toggle = false;
+  errorMessage: string;
 
-  constructor(cartData: CartDataService) {
-    this.dataArray = cartData.sendData();
+  constructor(private cartDataService: CartDataService) {
+    this.dataArray = cartDataService.sendData();
   }
 
-ngOnInit() {}
+  ngOnInit() {
+    this.cartDataService.getJSON().subscribe(data => {
+      this.dataArray = data.cartData;
+      console.log('data received from CartDataService');
+    });
+  }
 
-onUserInput(event) {
-  this.word = event.target.value;
-}
-onAddItem() {
-  this.dataArray = [...this.dataArray, this.word];
-  console.log('Item Added: ' + this.word);
-}
-onPopItem() {
-  this.dataArray = this.dataArray.slice(0, -1);
-  console.log('Item Removed');
-}
-onUpperItem() {
-  this.upper = true;
-  console.log('Item To Upper Case');
-}
-onLowerItem() {
-  this.upper = false;
-  console.log('Item To Lower Case');
-}
-onScrambleItem() {
-  this.scramble = true;
-  console.log('Item Scrambled');
-}
-onUnscrambleItem() {
-  this.scramble = false;
-  console.log('Item Unscrambled');
-}
-clearBox() {
-  ((document.getElementById('box') as HTMLInputElement).value) = '';
-  console.log('This should clear the box');
-}
-onLargeItem() {
-  this.toggle = true;
-  console.log('Large Font');
-}
-onSmallItem() {
-  this.toggle = false;
-  console.log('Small Font');
-}
-
+  onUserInput(event) {
+    this.word = event.target.value;
+  }
+  onAddItem() {
+    this.dataArray = [...this.dataArray, this.word];
+    console.log('Item Added: ' + this.word);
+  }
+  onPopItem() {
+    this.dataArray = this.dataArray.slice(0, -1);
+    console.log('Item Removed');
+  }
+  onChangeCaseItem() {
+    this.upper = !this.upper;
+    if(this.upper === false) {
+      console.log('Changed item to lower case');
+    } else {
+      console.log('Changed item to upper case');
+    }
+  }
+  onToggleScrambleItem() {
+    this.scramble = !this.scramble;
+    if(this.scramble === true) {
+      console.log('Item has been scrambled');
+    } else {
+      console.log('Item has been unscrambled');
+    }
+  }
+  clearBox() {
+    ((document.getElementById('box') as HTMLInputElement).value) = '';
+    ((document.getElementById('box') as HTMLInputElement).placeholder) = '';
+    console.log('Box cleared');
+  }
+  onToggleSizeItem() {
+    this.toggle = !this.toggle;
+    if(this.toggle === true) {
+      console.log('Item is large font');
+    } else {
+      console.log('Item is regular font');
+    }
+  }
 }

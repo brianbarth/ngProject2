@@ -1,0 +1,64 @@
+<!-- navigation ( event buttons )-->
+<div class="container">
+
+  <div class="nav justify-content-center">
+    <ul class="nav col-6 justify-content-center">
+      <li>
+        <input id="box" type="text" (input)="onUserInput($event)" (focus)="clearBox()" value=''>
+      </li>
+      <li class="nav-item">
+        <button type="button" class="btn btn-primary btn-sm" (click)="onAddItem()">Add</button>
+      </li>
+      <li class="nav-item">
+        <button type="button" class="btn btn-primary btn-sm" (click)="onPopItem()">Pop</button>
+      </li>
+    </ul>
+  </div>
+
+  <div class="nav justify-content-center border-bottom border-success">
+    <ul class="nav col-6 justify-content-center">
+      <li class="nav-item">
+        <button type="button" class="btn btn-secondary btn-sm" (click)="onUpperItem()">Upper</button>
+      </li>
+      <li class="nav-item">
+        <button type="button" class="btn btn-secondary btn-sm" (click)="onLowerItem()">Lower</button>
+      </li>
+      <li class="nav-item" *ngIf="!scramble">
+        <button type="button" class="btn btn-info btn-sm" (click)="onScrambleItem()">Mix</button>
+      </li>
+      <li class="nav-item" *ngIf="scramble">
+        <button type="button" class="btn btn-info btn-sm" (click)="onUnscrambleItem()">UnMix</button>
+      </li>
+      <li class="nav-item" *ngIf="!toggle">
+        <button type="button" class="btn btn-info btn-sm" (click)="onLargeItem()">Large</button>
+      </li>
+      <li class="nav-item" *ngIf="toggle">
+        <button type="button" class="btn btn-info btn-sm" (click)="onSmallItem()">Small</button>
+      </li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- main array container -->
+
+<div class="container" id="arrayBox">
+  <div class="row text-center" *ngIf="!upper && !scramble">
+    <li class="col-6 col-sm-4 col-md-3" *ngFor="let item of dataArray" [ngStyle]="{'font-size.px': toggle ? 20 : 14 }">{{ item | lowercase }}</li>
+  </div>
+  <div class="row text-center" *ngIf="upper && !scramble">
+    <li class="col-6 col-sm-4 col-md-3" *ngFor="let item of dataArray" [ngStyle]="{'font-size.px': toggle ? 20 : 14 }">{{ item | uppercase }}</li>
+  </div>
+  <div class="row text-center" *ngIf="!upper && scramble">
+    <li class="col-6 col-sm-4 col-md-3" *ngFor="let item of dataArray" [ngStyle]="{'font-size.px': toggle ? 20 : 14 }">{{ item | scramble }}</li>
+  </div>
+  <div class="row text-center" *ngIf="upper && scramble">
+    <li class="col-6 col-sm-4 col-md-3" *ngFor="let item of dataArray" [ngStyle]="{'font-size.px': toggle ? 20 : 14 }">{{ item | uppercase | scramble }}</li>
+  </div>
+</div>
+
+
+
+<!-- [ngClass]="{'col-4': toggle}" -->
+
+<!-- [ngStyle]="{'font-size.px': toggle ? 24 : 14 }" -->

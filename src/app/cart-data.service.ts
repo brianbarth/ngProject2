@@ -1,27 +1,39 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartDataService {
 
-  cartData = [
-    'bananas',
-    'peaches',
-    'blueberries',
-    'watermelon',
-    'strawberries',
-    'kiwi',
-    'pears',
-    'grapes',
-    'figs',
-    'dates',
-    'papaya'
-  ];
+  cartData: string[];
+
+  constructor(private http: HttpClient) {
+    this.getJSON().subscribe(data => {
+      console.log('data loaded from file');
+    });
+   }
+
+   public getJSON(): Observable<any> {
+    return this.http.get('/assets/data.json');
+   }
 
   sendData(){
     return this.cartData;
   }
-
-  constructor() { }
 }
+// cartData = [
+//   'bananas',
+//   'peaches',
+//   'blueberries',
+//   'watermelon',
+//   'strawberries',
+//   'kiwi',
+//   'pears',
+//   'grapes',
+//   'figs',
+//   'dates',
+//   'papaya'
+// ];

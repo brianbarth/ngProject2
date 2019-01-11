@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { CartItemsComponent } from './cart-items/cart-items.component';
@@ -13,7 +14,8 @@ import { Scramble } from './shared/scramble.pipe';
     Scramble
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
   providers: [CartDataService],
   bootstrap: [AppComponent]
