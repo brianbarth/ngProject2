@@ -12,7 +12,7 @@ export class CartItemsComponent implements OnInit {
   scramble = false;
   word: string;
   toggle = false;
-  errorMessage: string;
+  errorMessage = false;
   capitalizeWord: string;
   allCapsWord: string;
 
@@ -38,6 +38,7 @@ export class CartItemsComponent implements OnInit {
     if (this.dataArray.includes(this.word)) {
       ((document.getElementById('box') as HTMLInputElement).value) = 'FOOD ALREADY EXISTS IN LIST!';
       console.log('error: food already included in array');
+      this.errorMessage = !this.errorMessage;
     } else {
     this.dataArray = [...this.dataArray, this.word];
     console.log('Item Added: ' + this.word);
@@ -67,6 +68,9 @@ export class CartItemsComponent implements OnInit {
     ((document.getElementById('box') as HTMLInputElement).value) = '';
     ((document.getElementById('box') as HTMLInputElement).placeholder) = '';
     console.log('Box cleared');
+    if ( this.errorMessage === true ) {
+      this.errorMessage = !this.errorMessage;
+    }
   }
   onToggleSizeItem() {
     this.toggle = !this.toggle;

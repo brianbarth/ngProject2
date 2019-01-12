@@ -4,7 +4,7 @@
   <div class="container text-center border-bottom border-success">
     <!--input box-->
     <span>
-      <input class="form-control" id="box" type="text" (input)="onUserInput($event)" (focus)="clearBox()" value='' placeholder="enter yummies here!">
+      <input class="form-control" id="box" type="text" (input)="onUserInput($event)" (focus)="clearBox()" [style.backgroundColor]="errorMessage ? 'rgba(255, 0, 0, 0.342)' : 'white'" value='' placeholder="enter yummies here!">
     </span>
     <!--various morphing buttons-->
     <span class="nav-item">
