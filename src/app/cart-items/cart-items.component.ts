@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { CartDataService } from '../cart-data.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-cart-items',
   templateUrl: './cart-items.component.html',
-  styleUrls: ['./cart-items.component.css']
+  styleUrls: ['./cart-items.component.css'],
 })
 export class CartItemsComponent implements OnInit {
-  dataArray: string[];
+
+  cartData$: Observable<any[]>;
   upper = false;
   scramble = false;
   word: string;
@@ -16,15 +18,12 @@ export class CartItemsComponent implements OnInit {
   capitalizeWord: string;
   allCapsWord: string;
 
-  constructor(private cartDataService: CartDataService) {
-    this.dataArray = cartDataService.sendData();
+  constructor(private service: CartDataService) {
   }
 
   ngOnInit() {
-    this.cartDataService.getJSON().subscribe(data => {
-      this.dataArray = data.cartData;
-      console.log('data received from: CartDataService');
-    });
+    this.cartData$ = this.service.sendData();
+      console.log(this.cartData$);
   }
 
   onUserInput(event) {
@@ -35,17 +34,17 @@ export class CartItemsComponent implements OnInit {
     this.word = this.word.charAt(0).toUpperCase() + this.word.slice(1);
     console.log(this.word);
 
-    if (this.dataArray.includes(this.word)) {
+    if (this.cartData$.includes(this.word)) {
       ((document.getElementById('box') as HTMLInputElement).value) = 'FOOD ALREADY EXISTS IN LIST!';
       console.log('error: food already included in array');
       this.errorMessage = !this.errorMessage;
     } else {
-    this.dataArray = [...this.dataArray, this.word];
+    this.cartData$ = [...this.cartData$, this.word];
     console.log('Item Added: ' + this.word);
     }
   }
   onPopItem() {
-    this.dataArray = this.dataArray.slice(0, -1);
+    this.cartData$ = this.cartData$.slice(0, -1);
     console.log('Item Removed');
   }
   onChangeCaseItem() {

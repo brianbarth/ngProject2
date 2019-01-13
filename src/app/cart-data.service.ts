@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
 
@@ -8,32 +8,13 @@ import { Observable } from 'rxjs';
 })
 export class CartDataService {
 
-  cartData: string[];
+  public cartData$: Observable<any[]>;
 
-  constructor(private http: HttpClient) {
-    this.getJSON().subscribe(data => {
-      console.log('data loaded from file: "data.json"');
-    });
+  constructor(db: AngularFirestore) {
+    this.cartData$ = db.collection('cartData').valueChanges();
    }
 
-   public getJSON(): Observable<any> {
-    return this.http.get('/assets/data.json');
-   }
-
-  sendData(){
-    return this.cartData;
+  sendData() {
+    return this.cartData$;
   }
 }
-// cartData = [
-//   'bananas',
-//   'peaches',
-//   'blueberries',
-//   'watermelon',
-//   'strawberries',
-//   'kiwi',
-//   'pears',
-//   'grapes',
-//   'figs',
-//   'dates',
-//   'papaya'
-// ];
