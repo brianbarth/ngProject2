@@ -17,7 +17,7 @@ import { Scramble } from './shared/scramble.pipe';
   ],
   imports: [
     BrowserModule,
-    AngularFireModule.initializeApp(environment.firebase, 'ngProject2'),
+    AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule
   ],
   providers: [CartDataService],

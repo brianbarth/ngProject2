@@ -4,11 +4,24 @@
   <div class="container text-center border-bottom border-success">
     <!--input box-->
     <span>
-      <input class="form-control" id="box" type="text" (input)="onUserInput($event)" (focus)="clearBox()" [style.backgroundColor]="errorMessage ? 'rgba(255, 0, 0, 0.342)' : 'white'" value='' placeholder="enter yummies here!">
+      <input
+        #wordInput
+        class="form-control" 
+        id="box" 
+        type="text" 
+        (focus)="clearBox()"
+        (keypress)="clearErrorMessage()"
+        (keyup.enter)="onAddItem(wordInput.value)"
+        [style.backgroundColor]="errorMessage ? 'rgba(255, 0, 0, 0.342)' : 'white'"
+        value=''
+        placeholder="enter yummies here!">
     </span>
     <!--various morphing buttons-->
+    <span class="error" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </span>
     <span class="nav-item">
-      <button type="button" class="btn btn-primary btn-sm" (click)="onAddItem()">+</button>
+      <button type="button" class="btn btn-primary btn-sm" (click)="onAddItem(wordInput.value)">+</button>
     </span>
     <span class="nav-item">
       <button type="button" class="btn btn-primary btn-sm" (click)="onPopItem()">-</button>
@@ -51,6 +64,11 @@
     <li class="col-6 col-sm-4 col-md-3" [ngStyle]="{'font-size.px': toggle ? 20 : 14 }" *ngFor="let item of dataArray">{{ item | uppercase | scramble }}</li>
   </div>
 </div>
+
+<pre>
+{{ cartData | json }}
+</pre>
+
 
 
 
