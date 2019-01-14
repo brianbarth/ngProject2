@@ -47,12 +47,21 @@ export class CartItemsComponent implements OnInit {
     this.errorMessage = false;
   }
 
-  
+  onRemoveItem(newWord: string) {
+    let word = newWord.toLowerCase();
+    word = word.charAt(0).toUpperCase() + word.slice(1);
+    console.log(word);
+    const foundItem = this.cartData.find(item => item.name === word)
+    if ( !foundItem ) {
+      this.errorMessage = 'FOOD IS NOT IN LIST!';
+      console.log('error: food already included in array');
+      return;
+    } 
 
-  // onPopItem() {
-  //   this.cartData$ = this.cartData$.slice(0, -1);
-  //   console.log('Item Removed');
-  // }
+    this.cartService.removeFromCart(foundItem);
+    
+    console.log('Item Removed');
+  }
   // onChangeCaseItem() {
   //   this.upper = !this.upper;
   //   if(this.upper === false) {

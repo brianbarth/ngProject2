@@ -24,7 +24,7 @@
       <button type="button" class="btn btn-primary btn-sm" (click)="onAddItem(wordInput.value)">+</button>
     </span>
     <span class="nav-item">
-      <button type="button" class="btn btn-primary btn-sm" (click)="onPopItem()">-</button>
+      <button type="button" class="btn btn-primary btn-sm" (click)="onRemoveItem(wordInput.value)">-</button>
     </span>
     <span class="nav-item" *ngIf="upper">
       <button type="button" class="btn btn-secondary btn-sm" (click)="onChangeCaseItem()">L</button>
