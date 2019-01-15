@@ -6,9 +6,9 @@
     <span>
       <input
         #wordInput
-        class="form-control" 
-        id="box" 
-        type="text" 
+        class="form-control"
+        id="box"
+        type="text"
         (focus)="clearBox()"
         (keypress)="clearErrorMessage()"
         (keyup.enter)="onAddItem(wordInput.value)"
@@ -21,10 +21,10 @@
       {{ errorMessage }}
     </span>
     <span class="nav-item">
-      <button type="button" class="btn btn-primary btn-sm" (click)="onAddItem(wordInput.value)">+</button>
+      <button type="button" class="btn btn-primary btn-sm" (click)="onAddItem(wordInput.value)">add</button>
     </span>
     <span class="nav-item">
-      <button type="button" class="btn btn-primary btn-sm" (click)="onRemoveItem(wordInput.value)">-</button>
+      <button type="button" class="btn btn-primary btn-sm" (click)="onRemoveItem(wordInput.value)">X</button>
     </span>
     <span class="nav-item" *ngIf="upper">
       <button type="button" class="btn btn-secondary btn-sm" (click)="onChangeCaseItem()">L</button>
@@ -44,6 +44,9 @@
     <span class="nav-item" *ngIf="toggle">
       <button type="button" class="btn btn-info btn-sm" (click)="onToggleSizeItem()">S</button>
     </span>
+    <span>
+      <button type="button" class="btn btn-info btn-sm" (click)="onOrderItem()">O</button>
+    </span>
   </div>
 
 </div>
@@ -52,22 +55,22 @@
 
 <div class="container text-white" id="arrayBox">
   <div class="row text-center" *ngIf="!upper && !scramble">
-    <li class="col-6 col-sm-4 col-md-3" [ngStyle]="{'font-size.px': toggle ? 20 : 14 }" *ngFor="let item of dataArray">{{ item  }}</li>
+    <li class="col-6 col-sm-4 col-md-3" [ngStyle]="{'font-size.px': toggle ? 20 : 14 }" *ngFor="let item of cartData">{{ item.name  }}</li>
   </div>
   <div class="row text-center" *ngIf="upper && !scramble">
-    <li class="col-6 col-sm-4 col-md-3" [ngStyle]="{'font-size.px': toggle ? 20 : 14 }" *ngFor="let item of dataArray">{{ item | uppercase }}</li>
+    <li class="col-6 col-sm-4 col-md-3" [ngStyle]="{'font-size.px': toggle ? 20 : 14 }" *ngFor="let item of cartData">{{ item.name | uppercase }}</li>
   </div>
   <div class="row text-center" *ngIf="!upper && scramble">
-    <li class="col-6 col-sm-4 col-md-3" [ngStyle]="{'font-size.px': toggle ? 20 : 14 }" *ngFor="let item of dataArray">{{ item | scramble }}</li>
+    <li class="col-6 col-sm-4 col-md-3" [ngStyle]="{'font-size.px': toggle ? 20 : 14 }" *ngFor="let item of cartData">{{ item.name | scramble }}</li>
   </div>
   <div class="row text-center" *ngIf="upper && scramble">
-    <li class="col-6 col-sm-4 col-md-3" [ngStyle]="{'font-size.px': toggle ? 20 : 14 }" *ngFor="let item of dataArray">{{ item | uppercase | scramble }}</li>
+    <li class="col-6 col-sm-4 col-md-3" [ngStyle]="{'font-size.px': toggle ? 20 : 14 }" *ngFor="let item of cartData">{{ item.name | uppercase | scramble }}</li>
   </div>
 </div>
 
-<pre>
+<!-- <pre>
 {{ cartData | json }}
-</pre>
+</pre> -->
 
 
 

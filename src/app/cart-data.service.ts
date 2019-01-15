@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators'
+import { map } from 'rxjs/operators';
 import { Cart } from './cart-items/cart.interface';
 
 
-const fsCollectionName = 'cartData'
+const fsCollectionName = 'cartData';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,7 @@ export class CartDataService {
   constructor(private db: AngularFirestore) { }
 
   getCartData$() {
-    return this.cart.valueChanges()
+    return this.cart.valueChanges();
   }
 
   addToCart(cartItem: Cart) {
@@ -28,13 +28,19 @@ export class CartDataService {
       id: newId
     }
 
-    this.cart.doc(newId).set(newItem)
+    this.cart.doc(newId).set(newItem);
   }
 
   removeFromCart(cartItem: Cart) {
     this.cart.doc(cartItem.id).delete();
   }
 
+  alphabetize() {
+    this.cart = this.db.collection<Cart>('cartData', ref => ref.orderBy('name'));
+    console.log(this.cart.doc('name'));
+  }
 }
+
+
 
 

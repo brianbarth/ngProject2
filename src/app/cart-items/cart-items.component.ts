@@ -38,9 +38,9 @@ export class CartItemsComponent implements OnInit {
       console.log('error: food already included in array');
       return;
     }
-
-    this.cartService.addToCart({ name: word })
+    this.cartService.addToCart({ name: word });
     console.log('Item Added: ' + word);
+    this.clearBox();
   }
 
   clearErrorMessage() {
@@ -56,28 +56,37 @@ export class CartItemsComponent implements OnInit {
       this.errorMessage = 'FOOD IS NOT IN LIST!';
       console.log('error: food already included in array');
       return;
-    } 
-
+    }
     this.cartService.removeFromCart(foundItem);
-    
     console.log('Item Removed');
   }
-  // onChangeCaseItem() {
-  //   this.upper = !this.upper;
-  //   if(this.upper === false) {
-  //     console.log('Changed item to lower case');
-  //   } else {
-  //     console.log('Changed item to upper case');
-  //   }
-  // }
-  // onToggleScrambleItem() {
-  //   this.scramble = !this.scramble;
-  //   if(this.scramble === true) {
-  //     console.log('Item has been scrambled');
-  //   } else {
-  //     console.log('Item has been unscrambled');
-  //   }
-  // }
+
+  onOrderItem() {
+    this.cartData = this.cartData.sort(function(a, b) {
+      if (a.name < b.name) { return -1; }
+      if (a.name > b.name) { return 1; }
+      return 0;
+    });
+  }
+
+  onChangeCaseItem() {
+    this.upper = !this.upper;
+    if(this.upper === false) {
+      console.log('Changed item to lower case');
+    } else {
+      console.log('Changed item to upper case');
+    }
+  }
+
+  onToggleScrambleItem() {
+    this.scramble = !this.scramble;
+    if(this.scramble === true) {
+      console.log('Item has been scrambled');
+    } else {
+      console.log('Item has been unscrambled');
+    }
+  }
+
   clearBox() {
     ((document.getElementById('box') as HTMLInputElement).value) = '';
     ((document.getElementById('box') as HTMLInputElement).placeholder) = '';
@@ -86,12 +95,13 @@ export class CartItemsComponent implements OnInit {
       // this.errorMessage = !this.errorMessage;
     }
   }
-  // onToggleSizeItem() {
-  //   this.toggle = !this.toggle;
-  //   if(this.toggle === true) {
-  //     console.log('Item is large font');
-  //   } else {
-  //     console.log('Item is regular font');
-  //   }
-  // }
+
+  onToggleSizeItem() {
+    this.toggle = !this.toggle;
+    if(this.toggle === true) {
+      console.log('Item is large font');
+    } else {
+      console.log('Item is regular font');
+    }
+  }
 }
