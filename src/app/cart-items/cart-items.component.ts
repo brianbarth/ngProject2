@@ -60,7 +60,7 @@ export class CartItemsComponent implements OnInit {
     this.cartService.removeFromCart(foundItem);
     console.log('Item Removed');
   }
-
+// classic compare function-- bitches!
   onOrderItem() {
     this.cartData = this.cartData.sort(function(a, b) {
       if (a.name < b.name) { return -1; }
@@ -69,6 +69,14 @@ export class CartItemsComponent implements OnInit {
     });
   }
 
+  onReverseOrderItem() {
+    this.cartData = this.cartData.sort(function(a, b) {
+      if (a.name < b.name) { return -1; }
+      if (a.name > b.name) { return 1; }
+      return 0;
+    });
+    this.cartData.reverse();
+  }
   onChangeCaseItem() {
     this.upper = !this.upper;
     if(this.upper === false) {

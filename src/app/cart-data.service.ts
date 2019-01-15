@@ -35,10 +35,6 @@ export class CartDataService {
     this.cart.doc(cartItem.id).delete();
   }
 
-  alphabetize() {
-    this.cart = this.db.collection<Cart>('cartData', ref => ref.orderBy('name'));
-    console.log(this.cart.doc('name'));
-  }
 }
 
 
